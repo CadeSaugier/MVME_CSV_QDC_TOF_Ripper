@@ -1,4 +1,4 @@
-//Organization & Output Code for MVME .csv Data File Output. Version: 1.0.0
+//Organization & Output Code for MVME .csv Data File Output. Version: 1.1.1
 // Program by: Cade Saugier, INPP EAL Ohio University
 
 /*
@@ -38,7 +38,7 @@ int getPSD(int s, int l)
 	float thisPSD = shortVal/longVal;
 /*####################################################*/
 
-	if(thisPSD>=1)
+	if(thisPSD>=1 or thisPSD<0)
 	{
 		return -1;
 	}
@@ -84,7 +84,7 @@ void update(int a,int b,int c)
 int main(int argc, char* argv[])
 {
 	cout << "\n<><><><><><><><><><><><><> MVME MDPP-16 CSV RIPPER <><><><><><><><><><><><><>\n";
-	cout << "\t--->Version 1.0.0\n";
+	cout << "\t--->Version 1.1.1\n";
 	cout << "\t--->By: Cade S.\n\n";
 	
 	//Check Terminal Inputs $> hist evt [#,#,#] file.csv log
