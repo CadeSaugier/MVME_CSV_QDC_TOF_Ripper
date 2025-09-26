@@ -1,0 +1,29 @@
+MVME MDPP-16 CSV RIPPER v1.0.0 {4/25/2025}
+
+--->What is this?
+>>>This code will allow a user to take the MesyTec MVME .csv data output file and extract raw histogram files (.xy) and event files (.evtln) for each of the 16 input channels on the MDPP-QDC. The code requires the user told MVME to export long, short, channel time, and trigger time data for each input channel of interest.
+
+--->How do I install this?
+>>>The code is very simple in that it's only one C++ script with required header files in the "include" directory. On Linux systems g++ (the standard GNU C++ compiler) is required. Simply running "source local_install.sh" will generate a binary in the current directory. If you wish to install globally simply run g++ in your own fashion or symbolically link the output from local_install.sh.
+
+--->How do I use this?
+>>>The binary mvme_mdpp-16_csv_ripper takes at most 5 inputs, and at minimum 2 inputs.
+>>>The primary arguments are "hist" and "evt". The argument "hist" asks the code to output directories of histograms corresponding to the input channels of interest. The argument "evt" asks for corresponding event files for each input channel.
+>>>The main argument is a pair of square brackets []. With an input of "[]", all input channels will be recognized by the code. If only the output of select input channels is required simply insert the identifier of the channel. For example: [0,5] will ONLY record inputs 3 and 5.
+>>>The secondary arguments are "log" and "all". The "log" argument will ask the code to output all logical decisions and recordings made within the .csv file. For most users this is NOT RECOMMENDED as the output file may be extremely large. This argument is simply for code troubleshooting. The "all" argument will ask to code to IGNORE all logical decisions when reading the .csv file. This information may be very useful to the user, however it is warned that possible non-physical events may be recorded that correspond to pure signal noise. This will also greatly increase output file size.
+
+--->Adjusting PSD & TOF Parameters
+>>>In order to get PSD & TOF values that allign with the experiment preformed, check the "Build Functions" section of the code in mvme_mdpp-16_csv_ripper.cpp. Here you will find "# PSD CALCULATION #" and "# TOF CALCULATION #" blocks that may be edited by the user to get the desired output. Recompile the code by running the local install again, or by manually running the GNU C++ compiler binary.
+
+--->Examples:
+	Build all histograms)
+		$>./mvme_mdpp-16_csv_ripper hist [] data.csv
+	Build event files for only input channel 15)
+		$>./mvme_mdpp-16_csv_ripper evt [15] data.csv
+	Build histograms and event files for inputs 8,10, and 13 and disregard internal logic)
+		$>./mvme_mdpp-16_csv_ripper hist evt [8,10,13] data.csv all
+	Build an event file for input 0 and record a log of all internal actions)
+		$>./mvme_mdpp-16_csv_ripper evt [0] data.csv log all
+
+--->Questions?
+>>>Find Cade S. in EAL 115
