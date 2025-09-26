@@ -9,7 +9,7 @@ MVME MDPP-16 CSV RIPPER v1.0.0 {4/25/2025}
 --->How do I use this?
 >>>The binary mvme_mdpp-16_csv_ripper takes at most 5 inputs, and at minimum 2 inputs.
 >>>The primary arguments are "hist" and "evt". The argument "hist" asks the code to output directories of histograms corresponding to the input channels of interest. The argument "evt" asks for corresponding event files for each input channel.
->>>The main argument is a pair of square brackets []. With an input of "[]", all input channels will be recognized by the code. If only the output of select input channels is required simply insert the identifier of the channel. For example: [0,5] will ONLY record inputs 3 and 5.
+>>>The main argument is a pair of square brackets []. With an input of "[]", all input channels will be recognized by the code. If only the output of select input channels is required simply insert the identifier of the channel. For example: [3,5] will ONLY record inputs 3 and 5.
 >>>The secondary arguments are "log" and "all". The "log" argument will ask the code to output all logical decisions and recordings made within the .csv file. For most users this is NOT RECOMMENDED as the output file may be extremely large. This argument is simply for code troubleshooting. The "all" argument will ask to code to IGNORE all logical decisions when reading the .csv file. This information may be very useful to the user, however it is warned that possible non-physical events may be recorded that correspond to pure signal noise. This will also greatly increase output file size.
 
 --->Adjusting PSD & TOF Parameters
