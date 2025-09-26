@@ -1,3 +1,3 @@
-g++ mvme_mdpp-16_csv_ripper.cpp
-mv a.out mvme_mdpp-16_csv_ripper
+g++ -o mvme_csv_qdc_tof_ripper run.cpp
 echo "Local Install Complete..."
+sleep 0.5
