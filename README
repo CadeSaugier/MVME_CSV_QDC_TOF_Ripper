@@ -1,4 +1,4 @@
-MVME MDPP-16 CSV RIPPER v1.1.1 {9/26/2025}
+MVME MDPP-16 CSV RIPPER v1.2.1 {9/28/2025}
 
 --->What is this?
 >>>This code will allow a user to take the MesyTec MVME .csv data output file and extract raw histogram files (.xy) and event files (.evtln) for each of the 16 input channels on the MDPP-QDC. The code requires the user told MVME to export long, short, channel time, and trigger time data for each input channel of interest.

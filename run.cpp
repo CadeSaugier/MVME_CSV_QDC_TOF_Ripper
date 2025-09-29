@@ -1,4 +1,4 @@
-//Organization & Output Code for MVME .csv Data File Output. Version: 1.1.1
+//Organization & Output Code for MVME .csv Data File Output. Version: 1.2.1
 // Program by: Cade Saugier, INPP EAL Ohio University
 
 /*
@@ -84,7 +84,7 @@ void update(int a,int b,int c)
 int main(int argc, char* argv[])
 {
 	cout << "\n<><><><><><><><><><><><><> MVME MDPP-16 CSV RIPPER <><><><><><><><><><><><><>\n";
-	cout << "\t--->Version 1.1.1\n";
+	cout << "\t--->Version 1.2.1\n";
 	cout << "\t--->By: Cade S.\n\n";
 	
 	//Check Terminal Inputs $> hist evt [#,#,#] file.csv log
@@ -105,7 +105,7 @@ int main(int argc, char* argv[])
 		}
 		bool dataRec[16];
 		string input3=argv[pos];
-		if(input3=="[]")
+		if(input3=="[]" or input3=="{}")
 		{
 			for(int i=0; i<16; i++)
 			{
@@ -122,7 +122,7 @@ int main(int argc, char* argv[])
 			while(k<input3.length()-1)
 			{
 				j=0;
-				while(input3[k+j]!=',' and input3[k+j]!=']')
+				while(input3[k+j]!=',' and input3[k+j]!=']' and input3[k+j]!='}')
 				{
 					j++;
 				}
@@ -181,42 +181,40 @@ int main(int argc, char* argv[])
 			if(dataFilePath[i]=='.') {fileMarker=i;}
 		}
 		dataFileName=dataFilePath.substr(lastDir+val,fileMarker-lastDir-val);
+		//Check for Additional Arguments
+		bool takeAll=false;
+		bool logMake=false;
+		string lastArgs;
+		if((argc-5)>0)
+		{
+			for(int k=5; k<argc; k++)
+			{
+				lastArgs=argv[k];
+				if(lastArgs=="all") {takeAll=true;}
+				if(lastArgs=="log") {logMake=true;}
+			}
+		}
 		//Log File Argument
 		ofstream logFile;
-		bool logMake=false;
-		pos++;
-		try
-		{
-			string input4 = argv[pos];
-			if(input4=="log")
-			{
-				cout << "\n   WARNING!   \n**************\n--->You are about to make a .log file.\n" << "--->This file may become extremely large.\n" << "--->File size may exceed input data file size.\n";
-				string ans;
-				cout << "\n----->Do you wish to continue? (y/n): ";
-				std::cin >> ans;
-				if(ans=="y" or ans=="Y") {logMake=true;}
-				else {logMake=false; dataFile.close(); cout << "\n--->Data File Closed at " << dataFilePath << endl << "--->Process Aborted\n"; exit(0);}
-			}
-		}
-		catch (std::logic_error) {}
 		if(logMake)
 		{
-			logFile.open("./"+dataFileName+"_rip.log");
-			logFile << "START\n";
+			cout << "\n   WARNING!   \n**************\n--->You are about to make a .log file.\n" << "--->This file may become extremely large.\n" << "--->File size may exceed input data file size.\n";
+			string ans;
+			cout << "\n----->Do you wish to continue? (y/n): ";
+			std::cin >> ans;
+			if(ans=="y" or ans=="Y")
+			{
+				logMake=true;
+				logFile.open("./"+dataFileName+"_rip.log");
+				logFile << "START\n";
+			}
+			else {logMake=false; dataFile.close(); cout << "\n--->Data File Closed at " << dataFilePath << endl << "--->Process Aborted\n"; exit(0);}
 		}
 		//Ask For All Recordings
-		bool takeAll=false;
-		if(logMake) {pos++;}
-		try
+		if(takeAll)
 		{
-			string input5 = argv[pos];
-			if(input5=="all")
-			{
-				cout << "++++++++++++++++++++++++++++++++++++++\n" << "*      ALL DATA ARGUMENT CALLED      *\n" << "++++++++++++++++++++++++++++++++++++++\n" << "--->Full Input To Be Recorded!\n--->Output Histogram Sums Will No Longer Match!\n";
-				takeAll=true;
-			}
+			cout << "++++++++++++++++++++++++++++++++++++++\n" << "*      ALL DATA ARGUMENT CALLED      *\n" << "++++++++++++++++++++++++++++++++++++++\n" << "--->Full Input To Be Recorded!\n--->Output Histogram Sums Will No Longer Match!\n";
 		}
-		catch (std::logic_error) {}
 		
 	//Get Head Line
 		string read;
