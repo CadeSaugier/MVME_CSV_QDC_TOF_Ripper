@@ -1,4 +1,4 @@
-//Organization & Output Code for MVME .csv Data File Output. Version: 1.2.1
+//Organization & Output Code for MVME .csv Data File Output. Version: 1.2.2
 // Program by: Cade Saugier, INPP EAL Ohio University
 
 /*
@@ -84,7 +84,7 @@ void update(int a,int b,int c)
 int main(int argc, char* argv[])
 {
 	cout << "\n<><><><><><><><><><><><><> MVME MDPP-16 CSV RIPPER <><><><><><><><><><><><><>\n";
-	cout << "\t--->Version 1.2.1\n";
+	cout << "\t--->Version 1.2.2\n";
 	cout << "\t--->By: Cade S.\n\n";
 	
 	//Check Terminal Inputs $> hist evt [#,#,#] file.csv log
@@ -204,7 +204,6 @@ int main(int argc, char* argv[])
 			std::cin >> ans;
 			if(ans=="y" or ans=="Y")
 			{
-				logMake=true;
 				logFile.open("./"+dataFileName+"_rip.log");
 				logFile << "START\n";
 			}
